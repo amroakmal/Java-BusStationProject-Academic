@@ -1,0 +1,7 @@
+To From Departure Time Arrival Time Ticket kind Tickes left,To From Departure Time Arrival Time Ticket kind Tickes left,To From Departure Time Arrival Time Ticket kind Tickes left,To From Departure Time Arrival Time Ticket kind Tickes left,To From Departure Time Arrival Time Ticket kind Tickes left,To From Departure Time Arrival Time Ticket kind Tickes left 
+Alexandria Cairo 1/5/2018 15/5/2018 VIP 3 
+Alexandria Cairo 1/5/2018 15/5/2018 Normal 0 
+Alexandria Cairo 18/5/2018 30/5/2018 Normal 13 
+Sinai Alexandria 1/6/2018 3/6/2018 VIP 0 
+spain Alexadnria 11/9/2018 27/12/2018 Normal 6 
+Alexandria Cairo 1/5/2018 16/5/2018 VIP 0 

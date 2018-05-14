@@ -1,0 +1,112 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.awt.TextField;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JTable;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.awt.event.ActionEvent;
+
+public class DriverWindow extends JFrame {
+
+	private JPanel contentPane;
+	private JTable table;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					DriverWindow frame = new DriverWindow();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public DriverWindow() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JButton btnShowTrips = new JButton("Show Trips");
+		
+		
+		
+		btnShowTrips.setBounds(131, 76, 89, 23);
+		contentPane.add(btnShowTrips);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"Bus Nymber", "To", "From", "Leaves ", "Arrival Time", "Driver Name"},
+			},
+			new String[] {
+				"New column", "New column", "New column", "New column", "New column", "New column"
+			}
+		));
+		table.setBounds(12, 126, 426, 115);
+		contentPane.add(table);
+	}
+	
+	public void showSuitableDriverData(String k) throws IOException {
+		FileReader reader = new FileReader("C:\\Users\\amrak\\Desktop\\Bus Station\\BusStation\\showCurrentBuses.txt");
+		BufferedReader buffer = new BufferedReader(reader);
+		//ArrayList <String> ArrayListData = new ArrayList<>();
+		String filepath = "C:\\Users\\amrak\\Desktop\\Bus Station\\BusStation\\showCurrentBuses.txt";
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		
+		String firstLine = buffer.readLine().trim();
+		String[] coloumnsName = firstLine.split(",");
+
+		File file = new File(filepath);
+		Scanner s = new Scanner(System.in);
+		while (buffer.ready()) {
+			String line = buffer.readLine();
+			String[] tokens = line.split(" ");
+			
+			for (String token : tokens) {
+				int i =0;
+				//while(s.hasNext()) {
+				if (token.trim().equals(k))
+					{
+						//ArrayListData.add(line);
+						model.setColumnIdentifiers(coloumnsName);
+						Object[] tableLines = buffer.lines().toArray();
+						String line1 = tableLines[i].toString().trim();
+						String[] dataRow = line.split(" ");
+						model.addRow(dataRow);
+					}
+				//}
+			}
+		}
+		buffer.close();
+		//return ArrayListData;
+	}
+	
+	
+	
+	
+	
+	
+}

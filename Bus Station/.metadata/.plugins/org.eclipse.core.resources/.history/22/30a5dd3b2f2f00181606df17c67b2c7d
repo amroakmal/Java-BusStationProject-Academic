@@ -1,0 +1,110 @@
+import java.awt.EventQueue;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import javax.swing.JFrame;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+public class DriverInformation extends JFrame {
+	private JTable table;
+	Scanner UserScan;
+	private String[] userArray = new String[200];
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					DriverInformation frame = new DriverInformation();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public DriverInformation() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 553, 300);
+		getContentPane().setLayout(null);
+
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+				new Object[][] { { "Bus Number", "To", "From", "Departure Time", "Arrival Time", "Driver Name" }, },
+				new String[] { "New column", "New column", "New column", "New column", "New column", "New column" }));
+		table.getColumnModel().getColumn(0).setPreferredWidth(94);
+		table.getColumnModel().getColumn(1).setPreferredWidth(83);
+		table.getColumnModel().getColumn(3).setPreferredWidth(101);
+		table.getColumnModel().getColumn(4).setPreferredWidth(85);
+		table.setBounds(30, 28, 450, 192);
+		getContentPane().add(table);
+
+		String filepath = "showCurrentBuses.txt";
+		File file = new File(filepath);
+
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(file));
+			String firstLine = br.readLine().trim();
+			String[] coloumnsName = firstLine.split(",");
+			DefaultTableModel model = (DefaultTableModel) table.getModel();
+			model.setColumnIdentifiers(coloumnsName);
+			Object[] tableLines = br.lines().toArray();
+
+			for (int i = 0; i < tableLines.length; i++) {
+				String line = tableLines[i].toString().trim();
+				String[] dataRow = line.split("-");
+				model.addRow(dataRow);
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+
+	}
+
+	public void readFile() {
+		try {
+			UserScan = new Scanner(new File("/home/amr/Desktop/Bus Station/showCurrentBuses"));
+		} catch (Exception e5) {
+			System.out.println("FILE NOT FOUND");
+		}
+	}
+
+	public void userFiletoArray() {
+		int i = 0;
+		while (UserScan.hasNext()) {
+			userArray[i] = UserScan.next();
+			i++;
+		}
+	}
+
+	public void showSuitableDriverData(String k) throws IOException {
+		FileReader reader = new FileReader("/home/amr/Desktop/Bus Station/showCurrentBuses");
+		BufferedReader buffer = new BufferedReader(reader);
+		while (buffer.ready()) {
+			String line = buffer.readLine();
+			String[] tokens = line.split(" ");
+			for (String token : tokens) {
+				int i =0;
+				if (token.trim().equals(k))
+					{
+						System.out.println(line);
+					}
+			}
+		}
+		buffer.close();
+		
+	}
+}

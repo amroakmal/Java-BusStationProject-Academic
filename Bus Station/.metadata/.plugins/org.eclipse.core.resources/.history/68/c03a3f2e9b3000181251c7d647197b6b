@@ -1,0 +1,165 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.awt.Font;
+import javax.swing.JTextField;
+
+public class CustomerMainWindow extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					CustomerMainWindow frame = new CustomerMainWindow();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	/**
+	 * Create the frame.
+	 */
+	public CustomerMainWindow(String customerName) {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 240, 375);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 240, 31);
+		panel.setBackground(new Color(249,105,14));
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblX = new JLabel("X");
+		lblX.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				System.exit(0);
+			}
+		});
+		lblX.setFont(new Font("Tahoma", Font.BOLD, 25));
+		lblX.setBounds(216, 0, 24, 26);
+		panel.add(lblX);
+		
+		
+		JLabel label = new JLabel("-");
+		label.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setState(JFrame.ICONIFIED);
+			}
+		});
+		label.setFont(new Font("Tahoma", Font.BOLD, 30));
+		label.setBounds(197, 6, 13, 14);
+		panel.add(label);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(0, 176, 240, 199);
+		panel_1.setBackground(new Color(44,62,80));
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JButton btnAccountInformation = new JButton("Account Information");
+		btnAccountInformation.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnAccountInformation.setForeground(Color.WHITE);
+		btnAccountInformation.setBounds(10, 24, 220, 40);
+		btnAccountInformation.setBackground(new Color(82,179,217));
+		panel_1.add(btnAccountInformation);
+		
+		JButton btnCancelReservation = new JButton("Cancel Reservation");
+		btnCancelReservation.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnCancelReservation.setForeground(Color.WHITE);
+		btnCancelReservation.setBounds(10, 87, 220, 40);
+		btnCancelReservation.setBackground(new Color(82,179,217));
+		panel_1.add(btnCancelReservation);
+		
+		JButton btnShowReservation = new JButton("Show Reservation");
+		btnShowReservation.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnShowReservation.setForeground(Color.WHITE);
+		btnShowReservation.setBounds(10, 148, 220, 40);
+		btnShowReservation.setBackground(new Color(82,179,217));
+		panel_1.add(btnShowReservation);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(0, 30, 240, 135);
+		panel_2.setBackground(new Color(44,62,80));
+		contentPane.add(panel_2);
+		panel_2.setLayout(null);
+		
+		JLabel lblTrips = new JLabel("Trips");
+		lblTrips.setForeground(Color.WHITE);
+		lblTrips.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblTrips.setBounds(92, 11, 55, 28);
+		panel_2.add(lblTrips);
+		
+		JButton btnInternal = new JButton("Internal");
+		btnInternal.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnInternal.setForeground(Color.WHITE);
+		btnInternal.setBounds(10, 50, 89, 61);
+		btnInternal.setBackground(new Color(82,179,217));
+		panel_2.add(btnInternal);
+		
+		JButton btnExternal = new JButton("External");
+		btnExternal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ExternalTripsWindow ExternalTripsWindowObject = new ExternalTripsWindow("Lybia","Sudan","SaudiArabia","Palastine","Syria","Tunsia","Lebanon",customerName);
+				ExternalTripsWindowObject.setVisible(true);
+				ExternalTripsWindowObject.pack();
+				ExternalTripsWindowObject.setLocationRelativeTo(null);
+				ExternalTripsWindowObject.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				ExternalTripsWindowObject.setBounds(100, 100, 500, 398);
+				dispose();
+			}
+		});
+		btnExternal.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnExternal.setForeground(Color.WHITE);
+		btnExternal.setBounds(141, 50, 89, 61);
+		btnExternal.setBackground(new Color(82,179,217));
+		panel_2.add(btnExternal);
+		
+		textField = new JTextField();
+		textField.setBounds(10, 11, 86, 20);
+		panel_2.add(textField);
+		textField.setColumns(10);
+		textField.setText(customerName);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(0, 163, 240, 15);
+		panel_3.setBackground(new Color(249,105,14));
+		contentPane.add(panel_3);
+		btnInternal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CustomerWindow CustomerWindowObject = new CustomerWindow("Alexandria","Cairo","Luxor","Aswan","SharmElShaikh","Hurghada","ElGona",customerName);
+				CustomerWindowObject.setVisible(true);
+				CustomerWindowObject.pack();
+				CustomerWindowObject.setLocationRelativeTo(null);
+				CustomerWindowObject.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				CustomerWindowObject.setBounds(100, 100, 500, 398);
+				dispose();
+			}
+		});
+		setUndecorated(true);
+	}
+}

@@ -1,0 +1,3 @@
+Bus number,From the city,To the city,Leaves at,Departure time,Driver Name
+1	 Alexandria	 Cairo	 8:30	 11:30	 driver
+2	 Cairo		 Sinai	 12:30	 23:30	 driver1	

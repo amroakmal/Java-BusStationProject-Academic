@@ -1,0 +1,53 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+public class ExternalTripsWindow extends CustomerWindow {
+	//class C extends CustomerWindow{
+
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ExternalTripsWindow frame = new ExternalTripsWindow();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public ExternalTripsWindow() {
+//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		//setBounds(100, 100, 450, 300);
+//		contentPane = new JPanel();
+//		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+//		contentPane.setLayout(new BorderLayout(0, 0));
+//		setContentPane(contentPane);
+		JComboBox comboBox = new JComboBox();
+		comboBox.setForeground(new Color(255, 255, 255));
+		comboBox.setFont(new Font("Tahoma", Font.BOLD, 14));
+		comboBox.setBackground(new Color(82,179,217));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Libya", "SaudiArabia", "Sudan"}));
+		comboBox.setBounds(10, 25, 206, 28);
+		
+	}
+
+}
+//}

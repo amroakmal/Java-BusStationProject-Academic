@@ -1,0 +1,60 @@
+import java.io.File;
+import java.util.Formatter;
+import java.util.Scanner;
+
+public class TripCostInformation {
+	Scanner UserScan;
+	private String[] userArray=new String[200];
+	private Formatter rf; 
+	int length;
+	
+	
+	
+	public void readFile()
+	{
+		try 
+		{
+			UserScan = new Scanner(new File("Cost.txt"));
+		}
+		catch(Exception e5)
+		{
+			System.out.println("FILE NOT FOUND");
+		}
+	}
+	
+	public void userFiletoArray()
+	{	
+		length=0;
+		while(UserScan.hasNext())
+		{
+			userArray[length]=UserScan.next();
+			length++;
+		}
+	}
+	
+	public String calculateCost(String f,String kindOfVehicle,int kintOfTrip)
+	{
+		String cost = null;
+		double doubleCost = 0;
+		
+		for(int i=0;i<length;i=i+2)
+		{
+			if(f.equals(userArray[i]))
+			{
+				cost=userArray[i+1];
+				doubleCost = doubleCost + Double.parseDouble(cost);
+			}
+			if(kindOfVehicle.equals(userArray[i]))
+			{
+				cost=userArray[i+1];
+				doubleCost = doubleCost + Double.parseDouble(cost);
+			}
+		}
+		if(kintOfTrip == 1)
+		{
+			doubleCost=(doubleCost*2)*0.9;
+		}
+		cost = ""+doubleCost;
+		return cost;
+	}
+}

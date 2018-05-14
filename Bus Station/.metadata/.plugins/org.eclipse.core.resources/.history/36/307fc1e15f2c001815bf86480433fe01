@@ -1,0 +1,177 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.awt.Font;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+
+public class MainWindow extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+	private JTextField textField_1;
+	AccountInformation AccountInformationObject = new AccountInformation();
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					MainWindow frame = new MainWindow();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public MainWindow() {
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 537, 359);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		textField = new JTextField();
+		textField.setBounds(168, 88, 227, 43);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(167, 149, 228, 43);
+		contentPane.add(textField_1);
+		
+		JLabel lblUserName = new JLabel("Username");
+		lblUserName.setForeground(Color.WHITE);
+		lblUserName.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblUserName.setBounds(20, 95, 89, 28);
+		contentPane.add(lblUserName);
+		
+		JLabel lblPassword = new JLabel("Password");
+		lblPassword.setForeground(Color.WHITE);
+		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblPassword.setBounds(20, 156, 103, 28);
+		contentPane.add(lblPassword);
+		
+		JButton btnLogin = new JButton("Login");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String s = textField.getText();
+				
+				int check;
+				AccountInformationObject.readFile();
+				AccountInformationObject.userFiletoArray();
+				check = AccountInformationObject.checkLogin(textField.getText(),textField_1.getText());
+				if(check==0)
+				{
+					JOptionPane.showMessageDialog(null, "Invalid username and password");
+				}
+				else if(check==1)
+				{
+					CustomerWindow CustomerWindowObject = new CustomerWindow();
+					CustomerWindowObject.setVisible(true);
+					CustomerWindowObject.pack();
+					CustomerWindowObject.setLocationRelativeTo(null);
+					CustomerWindowObject.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					CustomerWindowObject.setBounds(100, 100, 230, 398);
+					dispose();
+				}
+				else if(check==2)
+				{
+					EmployeeWindow EmployeeWindowObject = new EmployeeWindow();
+					EmployeeWindowObject.setVisible(true);
+					EmployeeWindowObject.pack();
+					EmployeeWindowObject.setLocationRelativeTo(null);
+					EmployeeWindowObject.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					EmployeeWindowObject.setBounds(100, 100, 420, 262);
+					dispose();
+				}
+				else if(check==3)
+				{
+					DriverWindow DriverWindowObject = new DriverWindow();
+					DriverWindowObject.setVisible(true);
+					DriverWindowObject.pack();
+					DriverWindowObject.setLocationRelativeTo(null);
+					DriverWindowObject.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					DriverWindowObject.setBounds(100, 100, 420, 262);
+					
+					try {
+						DriverInformation DriverInformationObject = new DriverInformation();
+						//DriverInformationObject.showSuitableDriverData(s);
+						ArrayList <String> data = new ArrayList();
+					FileReader reader = new FileReader("C:\\Users\\amrak\\Desktop\\Bus Station\\BusStation\\showCurrentBuses.txt");
+						BufferedReader buffer = new BufferedReader(reader);
+						while (buffer.ready()) {
+							String line = buffer.readLine();
+							String[] tokens = line.split(" ");
+							for (String token : tokens) {
+								int i =0;
+								if (token.trim().equals(s))
+									{
+										data.get(i);
+										i++;
+									}
+							}
+						}
+						buffer.close();
+						
+						return s;
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					dispose();
+				}
+			}
+		});
+		btnLogin.setBounds(292, 208, 103, 23);
+		contentPane.add(btnLogin);
+		
+		JLabel lblDontHaveAccount = new JLabel("Don't have an account? Signup");
+		lblDontHaveAccount.setForeground(Color.WHITE);
+		lblDontHaveAccount.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		lblDontHaveAccount.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent arg0) {
+				Signup SignupObject =new Signup();
+				SignupObject.setVisible(true);
+				SignupObject.pack();
+				SignupObject.setLocationRelativeTo(null);
+				SignupObject.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				SignupObject.setBounds(100, 100, 420, 262);
+				dispose();
+			}
+		});
+		lblDontHaveAccount.setBounds(168, 212, 132, 14);
+		contentPane.add(lblDontHaveAccount);
+		
+		JLabel lblNewLabel = new JLabel("");
+		//lblNewLabel.setIcon(new ImageIcon("C:\\Users\\AbdElRahman\\Downloads\\BusStationMainWindowPhotoNew2.png"));
+		lblNewLabel.setBounds(0, 0, 531, 330);
+		contentPane.add(lblNewLabel);
+	}
+}

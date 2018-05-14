@@ -1,0 +1,10 @@
+Alexandria Cairo 1/5/2018 15/5/2018 Bus 2 Nostop 12am 
+Alexandria Cairo 1/5/2018 16/5/2018 Bus 42 Manystop 12am 
+Alexandria Cairo 18/5/2018 30/5/2018 Bus 12 Onestop 12am 
+Sinai Alexandria 1/5/2018 15/5/2018 Car 1 Onestop 12am 
+Cairo Sinai 11/9/2018 27/12/2018 MiniBus 6 Onestop 12am 
+Cairo Sinai 11/9/2018 28/12/2018 Bus 6 Manyestop 12am 
+Cairo Sinai 11/9/2018 29/12/2018 MiniBus 6 Onestop 12am 
+Alexandria SaudiArabia 18/5/2018 30/6/2018 Bus 12 Manystop 12am 
+Cairo Lybia 30/5/2018 14/6/2018 Bus 24 Onestop 12am 
+Alexandria Cairo 1/5/2018 15/5/2018 Van 4 Onestop 12am 

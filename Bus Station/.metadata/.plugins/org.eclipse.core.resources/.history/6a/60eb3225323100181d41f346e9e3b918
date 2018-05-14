@@ -1,0 +1,744 @@
+import java.awt.EventQueue;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class CustomerWindow extends JFrame {
+
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					CustomerWindow frame = new CustomerWindow();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	/**
+	 * Create the frame.
+	 */
+	int checkReturnDate=1;
+	TripInformation TripInformationObject = new TripInformation();
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	JComboBox comboBox = new JComboBox();
+	int enableReturnDate=1;
+	String[] identicalTrips = new String[20];
+	int checkedText;
+	private String tripCost;
+	TripCostInformation TripCostInformationObject = new TripCostInformation();
+	private JTextField textField_3;
+	JLabel lblEachTripCosts = new JLabel("Each trip costs:");
+
+	
+	public CustomerWindow(String a,String b,String c,String d,String e,String f,String g,String customerName) {
+		setBackground(new Color(44,62,80));
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 500, 398);
+		setUndecorated(true);
+		
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		JButton btnNewButton_1 = new JButton("Search");
+		JButton btnNewButton_2 = new JButton("Change");
+		JButton btnNewButton_3 = new JButton("Return");
+		JButton btnOnewayTrip = new JButton("One-way");
+		JButton btnNewButton = new JButton("Round");
+		btnNewButton_3.setFont(new Font("Tahoma", Font.BOLD, 14));
+	
+		JComboBox comboBox_4 = new JComboBox();
+		ButtonGroup group = new ButtonGroup();
+
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(44,62,80));
+		panel.setBounds(0, 31, 226, 51);
+		contentPane.add(panel);
+		panel.setLayout(null);
+
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(44,62,80));
+		panel_1.setBounds(0, 81, 226, 266);
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JLabel lblFrom = new JLabel("From");
+		lblFrom.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblFrom.setForeground(new Color(249,105,14));
+		lblFrom.setBounds(10, 0, 55, 28);
+		panel_1.add(lblFrom);
+
+		
+		comboBox.setForeground(new Color(255, 255, 255));
+		comboBox.setFont(new Font("Tahoma", Font.BOLD, 14));
+		comboBox.setBackground(new Color(82,179,217));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {a,b,c,d,e,f,g}));
+		comboBox.setBounds(10, 25, 206, 28);
+		panel_1.add(comboBox);
+		
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setForeground(new Color(255, 255, 255));
+		comboBox_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		comboBox_1.setBackground(new Color(82,179,217));
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {a,b,c,d,e,f,g}));
+		comboBox_1.setBounds(10, 93, 206, 28);
+		panel_1.add(comboBox_1);
+		
+		
+		JComboBox comboBox_2 = new JComboBox();
+		comboBox_2.setForeground(new Color(255, 255, 255));
+		comboBox_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
+		comboBox_2.setBackground(new Color(82,179,217));
+		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"1/5/2018", "5/17/2018", "5/18/2018"}));
+		comboBox_2.setBounds(10, 163, 206, 28);
+		panel_1.add(comboBox_2);
+
+		JLabel lblTo = new JLabel("To");
+		lblTo.setForeground(new Color(249,105,14));
+		lblTo.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblTo.setBounds(10, 68, 153, 28);
+		panel_1.add(lblTo);
+
+		JLabel lblGoingDate = new JLabel("Going date");
+		lblGoingDate.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblGoingDate.setForeground(new Color(249,105,14));
+		lblGoingDate.setBounds(10, 132, 80, 31);
+		panel_1.add(lblGoingDate);
+		
+		
+		JComboBox comboBox_3 = new JComboBox();
+		comboBox_3.setBounds(10, 227, 206, 28);
+		panel_1.add(comboBox_3);
+		comboBox_3.setFont(new Font("Tahoma", Font.BOLD, 14));
+		comboBox_3.setForeground(new Color(255, 255, 255));
+		comboBox_3.setBackground(new Color(82,179,217));
+		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {"6/17/2018", "6/18/2018", "15/5/2018"}));
+		
+		JLabel lblReturnDate = new JLabel("Return date");
+		lblReturnDate.setBounds(10, 199, 88, 28);
+		panel_1.add(lblReturnDate);
+		lblReturnDate.setForeground(new Color(249,105,14));
+		lblReturnDate.setFont(new Font("Tahoma", Font.BOLD, 15));
+		
+		JLabel lblNumberOfTickets = new JLabel("Number of tickets");
+		lblNumberOfTickets.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNumberOfTickets.setForeground(new Color(255, 140, 0));
+		lblNumberOfTickets.setBounds(31, 73, 174, 19);
+		panel_1.add(lblNumberOfTickets);
+		
+		JButton btnNewButton_4 = new JButton("Confirm Reservation");
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+					if(checkedText == 1)
+					{
+						if(Integer.parseInt(identicalTrips[5])<Integer.parseInt(comboBox_4.getSelectedItem().toString()))
+						{
+							JOptionPane.showMessageDialog(null, "Unavilabe places");
+						}
+						else if(Integer.parseInt(identicalTrips[5])>=Integer.parseInt(comboBox_4.getSelectedItem().toString()))
+						{
+							TripInformationObject.saveConfirmedTrips(identicalTrips[0],identicalTrips[1],identicalTrips[2],identicalTrips[3],identicalTrips[4],identicalTrips[5],comboBox_4.getSelectedItem().toString());
+							TripInformationObject.saveReservations(customerName,identicalTrips[0],identicalTrips[1],identicalTrips[2],identicalTrips[3],identicalTrips[4],comboBox_4.getSelectedItem().toString());
+							JOptionPane.showMessageDialog(null, "Trip is successfully reserved");
+							comboBox_4.setVisible(false);
+							comboBox.setVisible(true);
+							comboBox_1.setVisible(true);
+							comboBox_2.setVisible(true);
+							btnNewButton.setVisible(true);
+							btnOnewayTrip.setVisible(true);
+							lblFrom.setVisible(true);
+							lblTo.setVisible(true);
+							lblGoingDate.setVisible(true);
+							lblReturnDate.setVisible(true);
+							comboBox_3.setVisible(true);
+							btnNewButton_1.setVisible(true);
+							textField.setVisible(false);
+							textField_1.setVisible(false);
+							textField_2.setVisible(false);
+							btnNewButton_2.setVisible(true);
+							lblNumberOfTickets.setVisible(false);
+							btnNewButton_3.setVisible(false);
+							btnNewButton_4.setVisible(false);
+							comboBox.enable();
+							comboBox.setBackground(new Color(82,179,217));
+							comboBox_1.enable();
+							comboBox_1.setBackground(new Color(82,179,217));
+							comboBox_2.enable();
+							comboBox_2.setBackground(new Color(82,179,217));
+							comboBox_3.enable();
+							comboBox_3.setBackground(new Color(82,179,217));
+							btnNewButton.enable();
+							btnNewButton.setBackground(new Color(82,179,217));
+							btnOnewayTrip.enable();
+							btnOnewayTrip.setBackground(new Color(82,179,217));
+							enableReturnDate=1;
+							btnNewButton_1.disable();
+							btnNewButton_1.setBackground(new Color(82,179,217));	
+							textField_3.setVisible(false);
+							lblEachTripCosts.setVisible(false);
+							identicalTrips=null;
+						}
+						checkedText=0;
+					}
+					if(checkedText == 2)
+					{
+						if(Integer.parseInt(identicalTrips[11])<Integer.parseInt(comboBox_4.getSelectedItem().toString()))
+						{
+							JOptionPane.showMessageDialog(null, "Unavilabe places");
+						}
+						else if(Integer.parseInt(identicalTrips[11])>=Integer.parseInt(comboBox_4.getSelectedItem().toString()))
+						{
+							TripInformationObject.saveConfirmedTrips(identicalTrips[6],identicalTrips[7],identicalTrips[8],identicalTrips[9],identicalTrips[10],identicalTrips[11],comboBox_4.getSelectedItem().toString());
+							TripInformationObject.saveReservations(customerName,identicalTrips[6],identicalTrips[7],identicalTrips[8],identicalTrips[9],identicalTrips[10],comboBox_4.getSelectedItem().toString());
+							JOptionPane.showMessageDialog(null, "Trip is successfully reserved");
+							comboBox_4.setVisible(false);
+							comboBox.setVisible(true);
+							comboBox_1.setVisible(true);
+							comboBox_2.setVisible(true);
+							btnNewButton.setVisible(true);
+							btnOnewayTrip.setVisible(true);
+							lblFrom.setVisible(true);
+							lblTo.setVisible(true);
+							lblGoingDate.setVisible(true);
+							lblReturnDate.setVisible(true);
+							comboBox_3.setVisible(true);
+							btnNewButton_1.setVisible(true);
+							textField.setVisible(false);
+							textField_1.setVisible(false);
+							textField_2.setVisible(false);
+							btnNewButton_2.setVisible(true);
+							lblNumberOfTickets.setVisible(false);
+							btnNewButton_3.setVisible(false);
+							btnNewButton_4.setVisible(false);
+							comboBox.enable();
+							comboBox.setBackground(new Color(82,179,217));
+							comboBox_1.enable();
+							comboBox_1.setBackground(new Color(82,179,217));
+							comboBox_2.enable();
+							comboBox_2.setBackground(new Color(82,179,217));
+							comboBox_3.enable();
+							comboBox_3.setBackground(new Color(82,179,217));
+							btnNewButton.enable();
+							btnNewButton.setBackground(new Color(82,179,217));
+							btnOnewayTrip.enable();
+							btnOnewayTrip.setBackground(new Color(82,179,217));
+							enableReturnDate=1;
+							btnNewButton_1.disable();
+							btnNewButton_1.setBackground(new Color(82,179,217));	
+							textField_3.setVisible(false);
+							identicalTrips=null;
+						}
+						checkedText=0;
+					}
+					if(checkedText == 3)
+					{
+						if(Integer.parseInt(identicalTrips[17])<Integer.parseInt(comboBox_4.getSelectedItem().toString()))
+						{
+							JOptionPane.showMessageDialog(null, "Unavilabe places");
+						}
+						else if(Integer.parseInt(identicalTrips[17])>=Integer.parseInt(comboBox_4.getSelectedItem().toString()))
+						{
+							TripInformationObject.saveConfirmedTrips(identicalTrips[12],identicalTrips[13],identicalTrips[14],identicalTrips[15],identicalTrips[16],identicalTrips[17],comboBox_4.getSelectedItem().toString());
+							TripInformationObject.saveReservations(customerName,identicalTrips[12],identicalTrips[13],identicalTrips[14],identicalTrips[15],identicalTrips[16],comboBox_4.getSelectedItem().toString());
+							JOptionPane.showMessageDialog(null, "Trip is successfully reserved");
+							comboBox_4.setVisible(false);
+							comboBox.setVisible(true);
+							comboBox_1.setVisible(true);
+							comboBox_2.setVisible(true);
+							btnNewButton.setVisible(true);
+							btnOnewayTrip.setVisible(true);
+							lblFrom.setVisible(true);
+							lblTo.setVisible(true);
+							lblGoingDate.setVisible(true);
+							lblReturnDate.setVisible(true);
+							comboBox_3.setVisible(true);
+							btnNewButton_1.setVisible(true);
+							textField.setVisible(false);
+							textField_1.setVisible(false);
+							textField_2.setVisible(false);
+							btnNewButton_2.setVisible(true);
+							lblNumberOfTickets.setVisible(false);
+							btnNewButton_3.setVisible(false);
+							btnNewButton_4.setVisible(false);
+							comboBox.enable();
+							comboBox.setBackground(new Color(82,179,217));
+							comboBox_1.enable();
+							comboBox_1.setBackground(new Color(82,179,217));
+							comboBox_2.enable();
+							comboBox_2.setBackground(new Color(82,179,217));
+							comboBox_3.enable();
+							comboBox_3.setBackground(new Color(82,179,217));
+							btnNewButton.enable();
+							btnNewButton.setBackground(new Color(82,179,217));
+							btnOnewayTrip.enable();
+							btnOnewayTrip.setBackground(new Color(82,179,217));
+							enableReturnDate=1;
+							btnNewButton_1.disable();
+							btnNewButton_1.setBackground(new Color(82,179,217));
+							textField_3.setVisible(false);
+							identicalTrips=null;
+						}
+						checkedText=0;
+					}
+				
+				
+			}
+		});
+		btnNewButton_4.setBounds(30, 142, 196, 34);
+		panel_1.add(btnNewButton_4);
+		btnNewButton_4.setFont(new Font("Tahoma", Font.BOLD, 14));
+		
+		lblEachTripCosts.setForeground(new Color(255, 140, 0));
+		lblEachTripCosts.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblEachTripCosts.setBounds(10, 7, 111, 14);
+		panel_1.add(lblEachTripCosts);
+		lblEachTripCosts.setVisible(false);
+		
+		textField_3 = new JTextField();
+		textField_3.setEditable(false);
+		textField_3.setFont(new Font("Tahoma", Font.BOLD, 14));
+		textField_3.setForeground(new Color(255, 255, 255));
+		textField_3.setBackground(new Color(44,62,80));
+		textField_3.setBounds(131, 6, 86, 20);
+		panel_1.add(textField_3);
+		textField_3.setColumns(10);
+		btnNewButton_4.setVisible(false);
+		lblNumberOfTickets.setVisible(false);
+		textField_3.setVisible(false);
+
+		
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnNewButton.setForeground(new Color(255, 255, 255));
+		btnNewButton.setBackground(new Color(82,179,217));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(enableReturnDate==1)
+				{
+					comboBox_3.setVisible(true);
+					lblReturnDate.setVisible(true);
+				}
+				checkReturnDate=1;
+				
+			}
+		});
+
+		btnNewButton.setBounds(0, 0, 113, 51);
+		panel.add(btnNewButton);
+		
+		
+		btnOnewayTrip.setForeground(new Color(255, 255, 255));
+		btnOnewayTrip.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnOnewayTrip.setBackground(new Color(82,179,217));
+		btnOnewayTrip.setBounds(113, 0, 113, 51);
+		panel.add(btnOnewayTrip);
+		btnOnewayTrip.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(enableReturnDate==1)
+				{
+					comboBox_3.setVisible(false);
+					lblReturnDate.setVisible(false);
+				}
+				checkReturnDate = 0;
+			}
+		});
+			
+		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(new Color(249,105,14));
+		panel_3.setBounds(0, 0, 500, 31);
+		contentPane.add(panel_3);
+		panel_3.setLayout(null);
+		
+		JLabel lblX = new JLabel("X");
+		lblX.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				System.exit(0);
+			}
+		});
+		lblX.setFont(new Font("Tahoma", Font.BOLD, 25));
+		lblX.setBounds(476, 4, 24, 26);
+		panel_3.add(lblX);
+		
+		JLabel lblNewLabel = new JLabel("-");
+		lblNewLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setState(JFrame.ICONIFIED);
+			}
+		});
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblNewLabel.setBounds(453, 8, 13, 14);
+		panel_3.add(lblNewLabel);
+		
+		JLabel lblReturn = new JLabel("Return");
+		lblReturn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				CustomerMainWindow CustomerMainWindowObject = new CustomerMainWindow(customerName);
+				 CustomerMainWindowObject.setVisible(true);
+				 CustomerMainWindowObject.pack();
+				 CustomerMainWindowObject.setLocationRelativeTo(null);
+				 CustomerMainWindowObject.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				 CustomerMainWindowObject.setBounds(100, 100, 240, 375);
+				dispose();
+			}
+		});
+		lblReturn.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblReturn.setBounds(10, 4, 79, 22);
+		panel_3.add(lblReturn);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(44,62,80));
+		panel_2.setBounds(225, 31, 275, 316);
+		contentPane.add(panel_2);
+		panel_2.setLayout(null);
+		
+		TripCostInformationObject.readFile();
+		TripCostInformationObject.userFiletoArray();
+	
+		textField_1 = new JTextField();
+		textField_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if(!textField_1.getText().equals("No trips are avilable"))
+				{
+					comboBox_4.setVisible(true);
+					comboBox.setVisible(false);
+					comboBox_1.setVisible(false);
+					comboBox_2.setVisible(false);
+					btnNewButton.setVisible(false);
+					btnOnewayTrip.setVisible(false);
+					lblFrom.setVisible(false);
+					lblTo.setVisible(false);
+					lblGoingDate.setVisible(false);
+					lblReturnDate.setVisible(false);
+					comboBox_3.setVisible(false);
+					btnNewButton_1.setVisible(false);
+					textField.setVisible(false);
+					textField_1.setVisible(false);
+					textField_2.setVisible(false);
+					btnNewButton_2.setVisible(false);
+					lblNumberOfTickets.setVisible(true);
+					btnNewButton_3.setVisible(true);
+					btnNewButton_4.setVisible(true);
+					checkedText=2;
+					tripCost = TripCostInformationObject.calculateCost(comboBox_1.getSelectedItem().toString(),identicalTrips[10],checkReturnDate);
+					textField_3.setVisible(true);
+					textField_3.setText(tripCost);					
+					lblEachTripCosts.setVisible(true);
+
+				}
+			}
+		});
+		textField_1.setEditable(false);
+		textField_1.setFont(new Font("Tahoma", Font.BOLD, 9));
+		textField_1.setColumns(10);
+		textField_1.setBounds(10, 122, 255, 86);
+		panel_2.add(textField_1);
+		textField_1.setVisible(false);
+
+
+		
+		textField_2 = new JTextField();
+		textField_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(!textField_2.getText().equals("No trips are avilable"))
+				{
+					comboBox_4.setVisible(true);
+					comboBox.setVisible(false);
+					comboBox_1.setVisible(false);
+					comboBox_2.setVisible(false);
+					btnNewButton.setVisible(false);
+					btnOnewayTrip.setVisible(false);
+					lblFrom.setVisible(false);
+					lblTo.setVisible(false);
+					lblGoingDate.setVisible(false);
+					lblReturnDate.setVisible(false);
+					comboBox_3.setVisible(false);
+					btnNewButton_1.setVisible(false);
+					textField.setVisible(false);
+					textField_1.setVisible(false);
+					textField_2.setVisible(false);
+					btnNewButton_2.setVisible(false);
+					lblNumberOfTickets.setVisible(true);
+					btnNewButton_3.setVisible(true);
+					btnNewButton_4.setVisible(true);
+					checkedText=3;
+					tripCost = TripCostInformationObject.calculateCost(comboBox_1.getSelectedItem().toString(),identicalTrips[16],checkReturnDate);
+					textField_3.setVisible(true);
+					textField_3.setText(tripCost);
+					lblEachTripCosts.setVisible(true);
+
+				}
+			}
+		});
+		textField_2.setEditable(false);
+		textField_2.setFont(new Font("Tahoma", Font.BOLD, 9));
+		textField_2.setColumns(10);
+		textField_2.setBounds(10, 219, 255, 86);
+		panel_2.add(textField_2);
+		textField_2.setVisible(false);
+
+
+		
+		textField = new JTextField();
+		textField.setEditable(false);
+		textField.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if(!textField.getText().equals("No trips are avilable"))
+				{
+					comboBox_4.setVisible(true);
+					comboBox.setVisible(false);
+					comboBox_1.setVisible(false);
+					comboBox_2.setVisible(false);
+					btnNewButton.setVisible(false);
+					btnOnewayTrip.setVisible(false);
+					lblFrom.setVisible(false);
+					lblTo.setVisible(false);
+					lblGoingDate.setVisible(false);
+					lblReturnDate.setVisible(false);
+					comboBox_3.setVisible(false);
+					btnNewButton_1.setVisible(false);
+					textField.setVisible(false);
+					textField_1.setVisible(false);
+					textField_2.setVisible(false);
+					btnNewButton_2.setVisible(false);
+					lblNumberOfTickets.setVisible(true);
+					btnNewButton_3.setVisible(true);
+					btnNewButton_4.setVisible(true);
+					checkedText=1;
+					tripCost = TripCostInformationObject.calculateCost(comboBox_1.getSelectedItem().toString(),identicalTrips[4],checkReturnDate);
+					textField_3.setVisible(true);
+					textField_3.setText(tripCost);
+					lblEachTripCosts.setVisible(true);
+				}
+			}
+		});
+		textField.setFont(new Font("Tahoma", Font.BOLD, 9));
+		textField.setBounds(10, 25, 255, 86);
+		panel_2.add(textField);
+		textField.setColumns(10);
+		textField.setVisible(false);
+		
+		textField.setText("No trips are avilable");
+		textField_1.setText("No trips are avilable");
+		textField_2.setText("No trips are avilable");
+		
+		comboBox_4.setBounds(10, 122, 214, 31);
+		panel_2.add(comboBox_4);
+		comboBox_4.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3"}));
+		
+		btnNewButton_3.setBounds(28, 188, 196, 40);
+		panel_2.add(btnNewButton_3);
+		
+		
+		btnNewButton_3.setVisible(false);
+		comboBox_4.setVisible(false);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBackground(new Color(82,179,217));
+		panel_4.setBounds(0, 347, 500, 51);
+		contentPane.add(panel_4);
+		panel_4.setLayout(null);
+		
+		
+		
+		btnNewButton_1.setBounds(0, 0, 226, 51);
+		panel_4.add(btnNewButton_1);
+		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnNewButton_1.setForeground(new Color(255, 255, 255));
+		btnNewButton_1.setBackground(new Color(82,179,217));
+		
+			btnNewButton_2.setBounds(224, 0, 276, 51);
+			panel_4.add(btnNewButton_2);
+			btnNewButton_2.setForeground(new Color(255, 255, 255));
+			btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD, 14));
+			btnNewButton_2.setBackground(new Color(82,179,217));
+			btnNewButton_2.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {	
+					comboBox.enable();
+					comboBox.setBackground(new Color(82,179,217));
+					comboBox_1.enable();
+					comboBox_1.setBackground(new Color(82,179,217));
+					comboBox_2.enable();
+					comboBox_2.setBackground(new Color(82,179,217));
+					comboBox_3.enable();
+					comboBox_3.setBackground(new Color(82,179,217));
+					btnNewButton.enable();
+					btnNewButton.setBackground(new Color(82,179,217));
+					btnOnewayTrip.enable();
+					btnOnewayTrip.setBackground(new Color(82,179,217));
+					enableReturnDate=1;
+					btnNewButton_1.disable();
+					btnNewButton_1.setBackground(new Color(82,179,217));
+					textField.setText("No trips are avilable");
+					textField_1.setText("No trips are avilable");
+					textField_2.setText("No trips are avilable");
+					textField.setVisible(false);
+					textField_1.setVisible(false);
+					textField_2.setVisible(false);		
+					identicalTrips=null;
+				}
+			});
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String from = comboBox.getSelectedItem().toString();
+				String to = comboBox_1.getSelectedItem().toString();
+				String goingDate = comboBox_2.getSelectedItem().toString();
+				String returnDate = "NoDate";
+				
+				if(checkReturnDate == 1)
+				{
+					returnDate = comboBox_3.getSelectedItem().toString();
+					
+				}
+				
+				if(from.equals(to))
+				{
+					JOptionPane.showMessageDialog(null, "Incorrect input");
+				}
+				else
+				{
+					TripInformationObject.readFile();
+					TripInformationObject.userFiletoArray();
+					
+					if(checkReturnDate==0)
+					{
+					identicalTrips = TripInformationObject.showSuitableTrips(from,to,goingDate);
+					try {
+					if(!identicalTrips[0].equals(null))
+						textField.setText(identicalTrips[0]+" "+identicalTrips[1]+" "+identicalTrips[2]+" "+identicalTrips[4]+" "+identicalTrips[5]);
+					if(!identicalTrips[5].equals(null))
+						textField_1.setText(identicalTrips[6]+" "+identicalTrips[7]+" "+identicalTrips[8]+" "+identicalTrips[10]+" "+identicalTrips[11]);
+					if(!identicalTrips[10].equals(null))
+						textField_2.setText(identicalTrips[12]+" "+identicalTrips[13]+" "+identicalTrips[14]+" "+identicalTrips[16]+" "+identicalTrips[17]);
+					}
+					catch(Exception e6)
+					{
+						
+					}
+					
+					comboBox.disable();
+					comboBox.setBackground(new Color(44,62,80));
+					comboBox_1.disable();
+					comboBox_1.setBackground(new Color(44,62,80));
+					comboBox_2.disable();
+					comboBox_2.setBackground(new Color(44,62,80));
+					comboBox_3.disable();
+					comboBox_3.setBackground(new Color(44,62,80));
+					btnNewButton.disable();
+					btnNewButton.setBackground(new Color(44,62,80));
+					btnOnewayTrip.disable();
+					btnOnewayTrip.setBackground(new Color(44,62,80));
+					enableReturnDate=0;
+					btnNewButton_1.disable();
+					btnNewButton_1.setBackground(new Color(44,62,80));
+					textField.setVisible(true);
+					textField_1.setVisible(true);
+					textField_2.setVisible(true);
+					}
+					
+					else if(checkReturnDate==1)
+					{
+					identicalTrips = TripInformationObject.showSuitableTrips(from,to,goingDate,returnDate);
+					try {
+					if(!identicalTrips[0].equals(null))
+						textField.setText(identicalTrips[0]+" "+identicalTrips[1]+" "+identicalTrips[2]+" "+identicalTrips[3]+" "+identicalTrips[4]+" "+identicalTrips[5]);
+					if(!identicalTrips[6].equals(null))
+						textField_1.setText(identicalTrips[6]+" "+identicalTrips[7]+" "+identicalTrips[8]+" "+identicalTrips[9]+" "+identicalTrips[10]+" "+identicalTrips[11]);
+					if(!identicalTrips[12].equals(null))
+						textField_2.setText(identicalTrips[12]+" "+identicalTrips[13]+" "+identicalTrips[14]+" "+identicalTrips[15]+" "+identicalTrips[16]);
+					}
+					catch(Exception e7)
+					{
+						
+					}
+					
+					comboBox.disable();
+					comboBox.setBackground(new Color(44,62,80));
+					comboBox_1.disable();
+					comboBox_1.setBackground(new Color(44,62,80));
+					comboBox_2.disable();
+					comboBox_2.setBackground(new Color(44,62,80));
+					comboBox_3.disable();
+					comboBox_3.setBackground(new Color(44,62,80));
+					btnNewButton.disable();
+					btnNewButton.setBackground(new Color(44,62,80));
+					btnOnewayTrip.disable();
+					btnOnewayTrip.setBackground(new Color(44,62,80));
+					enableReturnDate=0;
+					btnNewButton_1.disable();
+					btnNewButton_1.setBackground(new Color(44,62,80));
+					textField.setVisible(true);
+					textField_1.setVisible(true);
+					textField_2.setVisible(true);
+
+					}
+					
+				}
+				
+				
+			}
+		});
+	
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				comboBox_4.setVisible(false);
+				comboBox.setVisible(true);
+				comboBox_1.setVisible(true);
+				comboBox_2.setVisible(true);
+				btnNewButton.setVisible(true);
+				btnOnewayTrip.setVisible(true);
+				lblFrom.setVisible(true);
+				lblTo.setVisible(true);
+				lblGoingDate.setVisible(true);
+				lblReturnDate.setVisible(true);
+				comboBox_3.setVisible(true);
+				btnNewButton_1.setVisible(true);
+				textField.setVisible(true);
+				textField_1.setVisible(true);
+				textField_2.setVisible(true);
+				btnNewButton_2.setVisible(true);
+				lblNumberOfTickets.setVisible(false);
+				btnNewButton_3.setVisible(false);
+				btnNewButton_4.setVisible(false);
+				textField_3.setVisible(false);
+				lblEachTripCosts.setVisible(false);
+
+			}
+		});
+	}
+}

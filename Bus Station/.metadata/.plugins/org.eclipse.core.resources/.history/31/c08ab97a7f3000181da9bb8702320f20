@@ -1,0 +1,96 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+public class ExternalTripsWindow extends CustomerWindow {
+	//class C extends CustomerWindow{
+
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ExternalTripsWindow frame = new ExternalTripsWindow();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public ExternalTripsWindow() {
+//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		//setBounds(100, 100, 450, 300);
+//		contentPane = new JPanel();
+//		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+//		contentPane.setLayout(new BorderLayout(0, 0));
+//		setContentPane(contentPane);
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(44,62,80));
+		panel_1.setBounds(0, 81, 226, 266);
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JLabel lblFrom = new JLabel("From");
+		lblFrom.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblFrom.setForeground(new Color(249,105,14));
+		lblFrom.setBounds(10, 0, 55, 28);
+		panel_1.add(lblFrom);
+
+		JComboBox comboBox = new JComboBox();
+		comboBox.setForeground(new Color(255, 255, 255));
+		comboBox.setFont(new Font("Tahoma", Font.BOLD, 14));
+		comboBox.setBackground(new Color(82,179,217));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Lybia", "Cairo", "Sinai"}));
+		comboBox.setBounds(10, 25, 206, 28);
+		panel_1.add(comboBox);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setForeground(new Color(255, 255, 255));
+		comboBox_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		comboBox_1.setBackground(new Color(82,179,217));
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Lybia", "Sudan", "Cairo"}));
+		comboBox_1.setBounds(10, 93, 206, 28);
+		panel_1.add(comboBox_1);
+		
+		
+		JComboBox comboBox_2 = new JComboBox();
+		comboBox_2.setForeground(new Color(255, 255, 255));
+		comboBox_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
+		comboBox_2.setBackground(new Color(82,179,217));
+		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"1/5/2018", "5/17/2018", "5/18/2018"}));
+		comboBox_2.setBounds(10, 163, 206, 28);
+		panel_1.add(comboBox_2);
+
+		JLabel lblTo = new JLabel("To");
+		lblTo.setForeground(new Color(249,105,14));
+		lblTo.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblTo.setBounds(10, 68, 153, 28);
+		panel_1.add(lblTo);
+
+		JLabel lblGoingDate = new JLabel("Going date");
+		lblGoingDate.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblGoingDate.setForeground(new Color(249,105,14));
+		lblGoingDate.setBounds(10, 132, 80, 31);
+		panel_1.add(lblGoingDate);
+		
+	}
+
+}
+//}

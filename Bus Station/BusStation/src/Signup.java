@@ -1,0 +1,165 @@
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import java.awt.Color;
+import java.awt.Font;
+
+public class Signup extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+	private JTextField textField_1;
+	AccountInformation AccountInformationObject = new AccountInformation();
+
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Signup frame = new Signup();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Signup() {
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 420, 262);
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color(44,62,80));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		setUndecorated(true);
+
+		
+		textField = new JTextField();
+		textField.setBounds(156, 55, 187, 34);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(156, 113, 187, 33);
+		contentPane.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel lblUsername = new JLabel("username");
+		lblUsername.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblUsername.setForeground(Color.WHITE);
+		lblUsername.setBounds(14, 63, 89, 14);
+		contentPane.add(lblUsername);
+		
+		JLabel lblPassword = new JLabel("Password");
+		lblPassword.setForeground(Color.WHITE);
+		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPassword.setBounds(14, 120, 79, 14);
+		contentPane.add(lblPassword);
+		
+		JButton btnSignup = new JButton("Signup");
+		btnSignup.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnSignup.setForeground(new Color(255, 255, 255));
+		btnSignup.setBackground(new Color(82,179,217));
+		btnSignup.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int check;
+				AccountInformationObject.readFile();
+				AccountInformationObject.userFiletoArray();
+				check=AccountInformationObject.checkUsername(textField.getText());
+				if(check==0 && !(textField_1.getText()).isEmpty() && !(textField.getText()).isEmpty())
+				{	
+					String usernameToFile=textField.getText()+" ";
+					String passwordToFile=textField_1.getText()+" ";
+					try 
+					{
+						Files.write(Paths.get("User.txt"),usernameToFile.getBytes(),StandardOpenOption.APPEND);
+						Files.write(Paths.get("User.txt"),passwordToFile.getBytes(),StandardOpenOption.APPEND);
+					}
+					catch(IOException e)
+					{
+						JOptionPane.showMessageDialog(null, "System error");
+					}
+					
+					MainWindow MainWindowObject =new MainWindow();
+					MainWindowObject.setVisible(true);
+					MainWindowObject.pack();
+					MainWindowObject.setLocationRelativeTo(null);
+					MainWindowObject.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					MainWindowObject.setBounds(100, 100, 342, 269);
+					dispose();
+					
+				}
+				else if((textField.getText()).isEmpty())
+				{
+					JOptionPane.showMessageDialog(null, "Enter Username");
+				}
+				else if((textField_1.getText()).isEmpty())
+				{
+					JOptionPane.showMessageDialog(null, "Enter Password");
+				}
+				else if(check==1)
+				{
+					JOptionPane.showMessageDialog(null, "Username already exists");
+				}
+				
+			}
+		});
+		btnSignup.setBounds(246, 171, 97, 34);
+		contentPane.add(btnSignup);
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBackground(new Color(249, 105, 14));
+		panel.setBounds(0, 0, 423, 34);
+		contentPane.add(panel);
+		
+		JLabel label = new JLabel("X");
+		label.setFont(new Font("Tahoma", Font.BOLD, 25));
+		label.setBounds(399, 4, 24, 26);
+		panel.add(label);
+		
+		JLabel label_1 = new JLabel("-");
+		label_1.setFont(new Font("Tahoma", Font.BOLD, 30));
+		label_1.setBounds(376, 8, 13, 14);
+		panel.add(label_1);
+		
+		JButton btnReturn = new JButton("Return");
+		btnReturn.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnReturn.setForeground(new Color(255, 255, 255));
+		btnReturn.setBackground(new Color(82,179,217));
+		btnReturn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ShowDriversFrame ShowDriversObject = new ShowDriversFrame();
+				ShowDriversObject.setVisible(true);
+				ShowDriversObject.pack();
+				ShowDriversObject.setLocationRelativeTo(null);
+				ShowDriversObject.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				ShowDriversObject.setBounds(200, 200, 500, 400);
+				dispose();
+			}
+
+		});
+		btnReturn.setBounds(115, 171, 97, 34);
+		contentPane.add(btnReturn);
+	}
+}

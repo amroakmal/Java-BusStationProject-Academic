@@ -1,0 +1,69 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+public class vehicleWindow extends JFrame {
+
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					vehicleWindow frame = new vehicleWindow();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+private String from,to,going,returning;
+	private JTextField textField;
+	CustomerWindow CustomerWindowObject =new CustomerWindow("Alexandria","Cairo","Luxor","Aswan","SharmElShaikh","Hurghada","ElGona");
+	
+	public vehicleWindow(String f,String t,String g)
+	{
+		from=f;
+		to=t;
+		going=g;
+	}
+	
+	public vehicleWindow(String f,String t,String g,String r)
+	{
+		from=f;
+		to=t;
+		going=g;
+		returning=r;
+	}
+	
+	public vehicleWindow(String f)
+	{
+		
+	}
+	
+	public vehicleWindow() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 230, 398);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		textField = new JTextField();
+		textField.setBounds(0, 0, 214, 49);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		textField.setText(from);
+	}
+}

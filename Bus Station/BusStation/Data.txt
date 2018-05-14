@@ -1,0 +1,5 @@
+Bus number	From the city	To the city	Leaves at	Departure time	Driver Name	
+Bus Number	To	From	Departure Time	Arrival Time	Driver Name	
+1		Alexandria		Cairo		8:30		11:30		driver	
+2		Cairo			KSAAA	12:30		23:30		driver1	
+3		Cairo		Alexandria		8:30		11:30		driver	

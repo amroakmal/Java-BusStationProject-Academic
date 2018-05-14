@@ -1,0 +1,7 @@
+UserID,From the city,To the city
+1	 Alexandria	 Cairo 	
+2	 Cairo		 Sinai	
+3	 Sinai		 Alexandria
+4	 Alexandria	 Cairo
+5	 Aswan		 Luxor	
+
